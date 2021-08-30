@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Mapping with Hector SLAM (ROS) // 최석원의 지식 보고</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.87.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="최석원" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://csw609.github.io/css/main.min.88e7083eff65effb7485b6e6f38d10afbec25093a6fac42d734ce9024d3defbd.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mapping with Hector SLAM (ROS)"/>
+<meta name="twitter:description" content="Mapping with Hector SLAM  LiDAR : RPLIDAR A3
+패키지 : hector_slam (hector_mapping, hector_geotiff)
+환경 : ubuntu 18.04, ROS
+ LiDAR를 이용해 연구실 map을 만들고자 한다.
+이를 위해 2D LiDAR SLAM알고리즘인 Hector SLAM을 사용하려한다.
+RPLIDAR 패키지 http://wiki.ros.org/rplidar
+ 현재는 LiDAR만으로 mapping을 진행하므로 hector mapping에 별도의 odom을 제공할 수가 없다
+따라서 hector mapping이 만드는 odom transform을 사용한다.
+⇩ hector mapping ros wiki
+ rplidar_a3.launch 파일을 보면
+ rplidar의 frame_id는 laser이므로
+ &lt;param name=&quot;base_frame&quot; value=&quot;laser&quot; /&gt; baser_frame에 대한 위와 같은 설정이 필요하다 value를 &ldquo;laser&rdquo; 로 하였"/>
+
+    <meta property="og:title" content="Mapping with Hector SLAM (ROS)" />
+<meta property="og:description" content="Mapping with Hector SLAM  LiDAR : RPLIDAR A3
+패키지 : hector_slam (hector_mapping, hector_geotiff)
+환경 : ubuntu 18.04, ROS
+ LiDAR를 이용해 연구실 map을 만들고자 한다.
+이를 위해 2D LiDAR SLAM알고리즘인 Hector SLAM을 사용하려한다.
+RPLIDAR 패키지 http://wiki.ros.org/rplidar
+ 현재는 LiDAR만으로 mapping을 진행하므로 hector mapping에 별도의 odom을 제공할 수가 없다
+따라서 hector mapping이 만드는 odom transform을 사용한다.
+⇩ hector mapping ros wiki
+ rplidar_a3.launch 파일을 보면
+ rplidar의 frame_id는 laser이므로
+ &lt;param name=&quot;base_frame&quot; value=&quot;laser&quot; /&gt; baser_frame에 대한 위와 같은 설정이 필요하다 value를 &ldquo;laser&rdquo; 로 하였" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://csw609.github.io/posts/mapping-with-hector-slam/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-08-31T06:04:44+09:00" />
+<meta property="article:modified_time" content="2021-08-31T06:04:44+09:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://csw609.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="최석원" /></a>
+      <h1>최석원의 지식 보고</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="https://github.com/csw609/csw609">About</a>
+      </nav>
+      <p>지식을 나눕시다!</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/csw609" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Mapping with Hector SLAM (ROS)</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Aug 31, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="mapping-with-hector-slam">Mapping with Hector SLAM</h1>
+<hr>
+<p>LiDAR : RPLIDAR A3</p>
+<p>패키지 : hector_slam (hector_mapping, hector_geotiff)</p>
+<p>환경 : ubuntu 18.04, ROS</p>
+<hr>
+<p>LiDAR를 이용해 연구실 map을 만들고자 한다.</p>
+<p>이를 위해 2D LiDAR SLAM알고리즘인 Hector SLAM을 사용하려한다.</p>
+<p>RPLIDAR 패키지 <a href="http://wiki.ros.org/rplidar">http://wiki.ros.org/rplidar</a></p>
+<figure><img src="/Mapping%20with%20Hector%20SLAM/_2021-05-04_04-40-44.png"/>
+</figure>
+
+<p>현재는 LiDAR만으로 mapping을 진행하므로 hector mapping에 별도의 odom을 제공할 수가 없다</p>
+<p>따라서 hector mapping이 만드는 odom transform을 사용한다.</p>
+<p>⇩ hector mapping ros wiki</p>
+<figure><img src="/Mapping%20with%20Hector%20SLAM/_2021-05-03_01-30-21.png"/>
+</figure>
+
+<p>rplidar_a3.launch 파일을 보면</p>
+<figure><img src="/Mapping%20with%20Hector%20SLAM/_2021-05-03_01-33-10.png"/>
+</figure>
+
+<p>rplidar의 frame_id는 <strong>laser</strong>이므로</p>
+<pre><code>    &lt;param name=&quot;base_frame&quot; value=&quot;laser&quot; /&gt;
+</code></pre><p>baser_frame에 대한 위와 같은 설정이 필요하다 value를 <strong>&ldquo;laser&rdquo;</strong> 로 하였</p>
+<p>hector mapping with rplidar a3</p>
+<p>baudrate : 256000</p>
+<p>Topic : map(/map), LaserScan(/scan), Pose(/slam_out_pose)</p>
+<figure><img src="/Mapping%20with%20Hector%20SLAM/_2021-05-03_02-59-03.png"/>
+</figure>
+
+<p>Map을 저장하기 위해서는 hector_geotiff package를 사용해야한다.</p>
+<p>해당 패키지를 실행 후</p>
+<figure><img src="/Mapping%20with%20Hector%20SLAM/_2021-05-03_03-02-05.png"/>
+</figure>
+
+<p>&ldquo;savegeotiff&quot;라는 syscommand를 publish해주어야한다.</p>
+<figure><img src="/Mapping%20with%20Hector%20SLAM/_2021-05-03_02-59-48.png"/>
+</figure>
+
+<figure><img src="/Mapping%20with%20Hector%20SLAM/_2021-05-03_03-13-32.png"/>
+</figure>
+
+<p>주기적으로 자동 저장하기를 원한다면</p>
+<figure><img src="/Mapping%20with%20Hector%20SLAM/_2021-05-03_03-17-28.png"/>
+</figure>
+
+<p>&ldquo;geotiff_save_period&rdquo; 해당 파라미터의 값을 원하는 주기(sec)로 조작하면 된다.</p>
+<figure><img src="/Mapping%20with%20Hector%20SLAM/_2021-05-03_08-39-30.png"/>
+</figure>
+
+<figure><img src="/Mapping%20with%20Hector%20SLAM/_2021-05-03_08-40-41.png"/>
+</figure>
+
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

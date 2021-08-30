@@ -6,7 +6,43 @@
     <description>Recent content on 최석원의 지식 보고</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 30 Aug 2021 16:17:11 +0900</lastBuildDate><atom:link href="https://csw609.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 31 Aug 2021 07:04:44 +0900</lastBuildDate><atom:link href="https://csw609.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Map Save with map_server (ROS)</title>
+      <link>https://csw609.github.io/posts/map-save-with-map_server-ros/</link>
+      <pubDate>Tue, 31 Aug 2021 07:04:44 +0900</pubDate>
+      
+      <guid>https://csw609.github.io/posts/map-save-with-map_server-ros/</guid>
+      <description>Map Save with map_server (ROS) SLAM으로 Mapping후 해당 Map을 저장하고 다시 불러오기 위해서는
+map_server라는 패키지를 사용할 수 있다.
+해당 패키지를 사용하면 저장한 맵을 이후에 map_server node를 사용해 손쉽게 publish할 수도 있다.
+ 해당 패키지는 navigation package에 포함되어있다.
+따라서 navigation package를 설치하면 map_server 패키지도 사용할 수 있다.
+navigation package를 다운로드하고 build하다 보면 설치되지 않은 의존성 패키지들에 의해 오류가 많이 발생한다.
+본인은 tf2_sensor_msgs에 관한 오류를 만났는데
+sudo apt-get install ros-melodic-tf2-sensor-msgs (melodic 기준) 관련 package를 설치함으로써 해결할 수 있다.</description>
+    </item>
+    
+    <item>
+      <title>Mapping with Hector SLAM (ROS)</title>
+      <link>https://csw609.github.io/posts/mapping-with-hector-slam/</link>
+      <pubDate>Tue, 31 Aug 2021 06:04:44 +0900</pubDate>
+      
+      <guid>https://csw609.github.io/posts/mapping-with-hector-slam/</guid>
+      <description>Mapping with Hector SLAM  LiDAR : RPLIDAR A3
+패키지 : hector_slam (hector_mapping, hector_geotiff)
+환경 : ubuntu 18.04, ROS
+ LiDAR를 이용해 연구실 map을 만들고자 한다.
+이를 위해 2D LiDAR SLAM알고리즘인 Hector SLAM을 사용하려한다.
+RPLIDAR 패키지 http://wiki.ros.org/rplidar
+ 현재는 LiDAR만으로 mapping을 진행하므로 hector mapping에 별도의 odom을 제공할 수가 없다
+따라서 hector mapping이 만드는 odom transform을 사용한다.
+⇩ hector mapping ros wiki
+ rplidar_a3.launch 파일을 보면
+ rplidar의 frame_id는 laser이므로
+ &amp;lt;param name=&amp;quot;base_frame&amp;quot; value=&amp;quot;laser&amp;quot; /&amp;gt; baser_frame에 대한 위와 같은 설정이 필요하다 value를 &amp;ldquo;laser&amp;rdquo; 로 하였</description>
+    </item>
+    
     <item>
       <title>Cartographer 설치 방법 On ROS</title>
       <link>https://csw609.github.io/posts/cartographer/</link>
