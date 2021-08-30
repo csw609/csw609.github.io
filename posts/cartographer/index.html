@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>Cartographer 설치 방법 On ROS // 최석원의 지식 보고</title>
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.87.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="최석원" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://csw609.github.io/css/main.min.88e7083eff65effb7485b6e6f38d10afbec25093a6fac42d734ce9024d3defbd.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Cartographer 설치 방법 On ROS"/>
+<meta name="twitter:description" content="Cartographer 설치 방법 on ROS   참고 자료
+https://google-cartographer-ros.readthedocs.io/en/latest/ros_api.html
+  Building &amp; Installation Cartographer ROS를 빌드하기 위해서는 wstool과 rosdep을 권장하고 빠른 빌드를 위해 Ninja 또한 추천한다고 한다.
+별도의 빌드툴을 사용하므로 catkin workspace 이외의 다른 workspace를 별도로 사용하는 것이 좋을듯하다.
+둘 중에 버전을 맞는 것을 사용하면 된다. 잘 모르겠다면 되는 걸로 하자!
+   sudo apt-get update sudo apt-get install -y python3-wstool python3-rosdep ninja-build stow   On older distributions:"/>
+
+    <meta property="og:title" content="Cartographer 설치 방법 On ROS" />
+<meta property="og:description" content="Cartographer 설치 방법 on ROS   참고 자료
+https://google-cartographer-ros.readthedocs.io/en/latest/ros_api.html
+  Building &amp; Installation Cartographer ROS를 빌드하기 위해서는 wstool과 rosdep을 권장하고 빠른 빌드를 위해 Ninja 또한 추천한다고 한다.
+별도의 빌드툴을 사용하므로 catkin workspace 이외의 다른 workspace를 별도로 사용하는 것이 좋을듯하다.
+둘 중에 버전을 맞는 것을 사용하면 된다. 잘 모르겠다면 되는 걸로 하자!
+   sudo apt-get update sudo apt-get install -y python3-wstool python3-rosdep ninja-build stow   On older distributions:" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://csw609.github.io/posts/cartographer/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-08-30T16:17:11+09:00" />
+<meta property="article:modified_time" content="2021-08-30T16:17:11+09:00" />
+
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://csw609.github.io"><img class="app-header-avatar" src="/avatar.jpg" alt="최석원" /></a>
+      <h1>최석원의 지식 보고</h1>
+      <nav class="app-header-menu">
+          <a class="app-header-menu-item" href="/">Home</a>
+             - 
+          
+          <a class="app-header-menu-item" href="https://github.com/csw609/csw609">About</a>
+      </nav>
+      <p>지식을 나눕시다!</p>
+      <div class="app-header-social">
+        
+          <a href="https://github.com/csw609" target="_blank" rel="noreferrer noopener">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github">
+  <title>Github</title>
+  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+</svg>
+          </a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">Cartographer 설치 방법 On ROS</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Aug 30, 2021
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          1 min read
+        </div>
+      </div>
+    </header>
+    <div class="post-content">
+      <h1 id="cartographer-설치-방법-on-ros">Cartographer 설치 방법 on ROS</h1>
+<ul>
+<li>
+<p>참고 자료</p>
+<p><a href="https://google-cartographer-ros.readthedocs.io/en/latest/ros_api.html">https://google-cartographer-ros.readthedocs.io/en/latest/ros_api.html</a></p>
+</li>
+</ul>
+<h1 id="building--installation"><strong>Building &amp; Installation</strong></h1>
+<p>Cartographer ROS를 빌드하기 위해서는 wstool과 rosdep을 권장하고 빠른 빌드를 위해 Ninja 또한 추천한다고 한다.</p>
+<p>별도의 빌드툴을 사용하므로 catkin workspace 이외의 다른 workspace를 별도로 사용하는 것이 좋을듯하다.</p>
+<p>둘 중에 버전을 맞는 것을 사용하면 된다. 잘 모르겠다면 되는 걸로 하자!</p>
+<ol>
+<li></li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#a6e22e">sudo</span> <span style="color:#a6e22e">apt</span><span style="color:#f92672">-</span><span style="color:#a6e22e">get</span> <span style="color:#a6e22e">update</span>
+<span style="color:#a6e22e">sudo</span> <span style="color:#a6e22e">apt</span><span style="color:#f92672">-</span><span style="color:#a6e22e">get</span> <span style="color:#a6e22e">install</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">y</span> <span style="color:#a6e22e">python3</span><span style="color:#f92672">-</span><span style="color:#a6e22e">wstool</span> <span style="color:#a6e22e">python3</span><span style="color:#f92672">-</span><span style="color:#a6e22e">rosdep</span> <span style="color:#a6e22e">ninja</span><span style="color:#f92672">-</span><span style="color:#a6e22e">build</span> <span style="color:#a6e22e">stow</span>
+</code></pre></div><ol start="2">
+<li></li>
+</ol>
+<p>On older distributions:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#a6e22e">sudo</span> <span style="color:#a6e22e">apt</span><span style="color:#f92672">-</span><span style="color:#a6e22e">get</span> <span style="color:#a6e22e">update</span>
+<span style="color:#a6e22e">sudo</span> <span style="color:#a6e22e">apt</span><span style="color:#f92672">-</span><span style="color:#a6e22e">get</span> <span style="color:#a6e22e">install</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">y</span> <span style="color:#a6e22e">python</span><span style="color:#f92672">-</span><span style="color:#a6e22e">wstool</span> <span style="color:#a6e22e">python</span><span style="color:#f92672">-</span><span style="color:#a6e22e">rosdep</span> <span style="color:#a6e22e">ninja</span><span style="color:#f92672">-</span><span style="color:#a6e22e">build</span> <span style="color:#a6e22e">stow</span>
+</code></pre></div><p>cartorgrapher를 위한 workspace로  ‘carto_ws’를 생성</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#a6e22e">mkdir</span> <span style="color:#a6e22e">carto_ws</span>
+<span style="color:#a6e22e">cd</span> <span style="color:#a6e22e">carto_ws</span>
+<span style="color:#a6e22e">wstool</span> <span style="color:#a6e22e">init</span> <span style="color:#a6e22e">src</span>
+<span style="color:#a6e22e">wstool</span> <span style="color:#a6e22e">merge</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">t</span> <span style="color:#a6e22e">src</span> <span style="color:#a6e22e">https</span><span style="color:#f92672">:</span><span style="color:#75715e">//raw.githubusercontent.com/cartographer-project/cartographer_ros/master/cartographer_ros.rosinstall
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">wstool</span> <span style="color:#a6e22e">update</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">t</span> <span style="color:#a6e22e">src</span>
+</code></pre></div><p>rosdep을 이용해 의존성 패키지들을 설치해 주어야 한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#a6e22e">sudo</span> <span style="color:#a6e22e">rosdep</span> <span style="color:#a6e22e">init</span>
+<span style="color:#a6e22e">rosdep</span> <span style="color:#a6e22e">update</span>
+<span style="color:#a6e22e">rosdep</span> <span style="color:#a6e22e">install</span> <span style="color:#f92672">--</span><span style="color:#a6e22e">from</span><span style="color:#f92672">-</span><span style="color:#a6e22e">paths</span> <span style="color:#a6e22e">src</span> <span style="color:#f92672">--</span><span style="color:#a6e22e">ignore</span><span style="color:#f92672">-</span><span style="color:#a6e22e">src</span> <span style="color:#f92672">--</span><span style="color:#a6e22e">rosdistro</span><span style="color:#f92672">=*</span><span style="color:#a6e22e">$</span>{<span style="color:#f92672">*</span><span style="color:#a6e22e">ROS_DISTRO</span><span style="color:#f92672">*</span>}<span style="color:#f92672">*</span> <span style="color:#f92672">-</span><span style="color:#a6e22e">y</span>
+</code></pre></div><p>해당 스크립트로 abseil.cpp 라이브러리를 설치할 것이다.</p>
+<p>src/cartographer/scripts/install_abseil.sh</p>
+<p>충돌이 생긴다면 제거도 고려해야 한다고 한다.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#a6e22e">sudo</span> <span style="color:#a6e22e">apt</span><span style="color:#f92672">-</span><span style="color:#a6e22e">get</span> <span style="color:#a6e22e">remove</span> <span style="color:#a6e22e">ros</span><span style="color:#f92672">-*</span><span style="color:#a6e22e">$</span>{<span style="color:#f92672">*</span><span style="color:#a6e22e">ROS_DISTRO</span><span style="color:#f92672">*</span>}<span style="color:#f92672">*-</span><span style="color:#a6e22e">abseil</span><span style="color:#f92672">-</span><span style="color:#a6e22e">cpp</span>
+</code></pre></div><p>빌드 및 설치!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#a6e22e">catkin_make_isolated</span> <span style="color:#f92672">--</span><span style="color:#a6e22e">install</span> <span style="color:#f92672">--</span><span style="color:#a6e22e">use</span><span style="color:#f92672">-</span><span style="color:#a6e22e">ninja</span>
+</code></pre></div><p>bashrc에 추가하여</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-jsx" data-lang="jsx"><span style="color:#a6e22e">source</span> <span style="color:#f92672">~</span><span style="color:#960050;background-color:#1e0010">/${워크스페이스}/install_isolated/setup.bash // 워크스페이스 =&gt; carto_ws</span>
+</code></pre></div><p>소스 설정도 잊지 말자</p>
+<p>이후 cartographer를 사용하기 위해서는 configuration파일과 launch파일 작성이 중요하다.</p>
+<p>configuration은 parameter들을 조작하는 것과 같다.</p>
+<p>launch  file 구성에서 중요한 부분은 cartographer node, ouccpancy grid map node를 실행하는 것과</p>
+<p>configuration 경로 설정이다.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
